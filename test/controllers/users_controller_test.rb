@@ -4,7 +4,7 @@ class UsersControllerTest < ActionController::TestCase
   
   def setup
 	@user = users(:michael)
-	# @other_user = users(:archer)
+	 @other_user = users(:archer)
   end
 
   test "should redirect index when not logged in" do 
@@ -53,6 +53,16 @@ class UsersControllerTest < ActionController::TestCase
 	end
 
 
+
+	test "should redirect following when not logged in" do
+	        get :following, id: @user
+	        assert_redirected_to login_url
+	end
+
+	test "should redirect followers when not logged in" do
+	 get :followers, id: @user
+	assert_redirected_to login_url
+	end 
 	# test "index as admin including pagination and delete links" do 
 	# 	log_in_as(@admin)
 	# 	get users_path
